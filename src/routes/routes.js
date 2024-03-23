@@ -1,6 +1,5 @@
 import {
   Home,
-  PageNotFound,
   Explore,
   SearchResult,
   MediaDetails,
@@ -22,9 +21,5 @@ export const routes = [
   {
     path: "/search/:query",
     element: <SearchResult />,
-  },
-  {
-    path: "*",
-    element: <PageNotFound />,
   },
 ];
