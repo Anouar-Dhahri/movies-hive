@@ -9,12 +9,13 @@ function MainLayout() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 2,
+        gap: "1rem",
         width: "100%",
         minHeight: "100vh",
+        position:"relative"
       }}>
       <Header />
-      <Box>
+      <Box sx={{width:"100%", minHeight:"100vh"}} >
         <Outlet />
       </Box>
       <Footer />

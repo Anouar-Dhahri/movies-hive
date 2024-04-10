@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import {
   Box,
   Text,
@@ -9,6 +9,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   HexagonMultiple,
@@ -18,6 +19,7 @@ import {
 } from "mdi-material-ui";
 import MenuIcon from "mdi-material-ui/Menu";
 function Header() {
+  const [lightOff, setLightOff] = useState(false)
   return (
     <Box
       sx={{
@@ -65,6 +67,7 @@ function Header() {
             MoviesHive
           </Text>
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -72,16 +75,22 @@ function Header() {
             flexDirection: "row",
             justifyContent: "flex-end",
           }}>
-          <IconButton
-            icon={<Magnify />}
-            sx={{ background: "transparent", mt: "15px" }}
-            _hover={{ color: "#037ade" }}
-          />
-          <IconButton
-            icon={<WeatherSunny />}
-            sx={{ background: "transparent", mt: "15px" }}
-            _hover={{ color: "#037ade" }}
-          />
+          <Tooltip label="Search">
+            <IconButton
+              icon={<Magnify />}
+              sx={{ background: "transparent", mt: "15px" }}
+              _hover={{ color: "#037ade" }}
+            />
+          </Tooltip>
+
+          <Tooltip label={lightOff ? "Turn On The Light":"Turn Off The Light"}>
+            <IconButton
+              icon={lightOff ? <WeatherSunny /> : <MoonWaningCrescent/>}
+              sx={{ background: "transparent", mt: "15px" }}
+              _hover={{ color: "#037ade" }}
+            />
+          </Tooltip>
+
           <Show above={"md"}>
             <Button
               variant="ghost"
@@ -138,7 +147,9 @@ function Header() {
             </Menu>
           </Show>
         </Box>
+
       </Box>
+      
     </Box>
   );
 }
