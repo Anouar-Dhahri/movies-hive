@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -18,21 +18,33 @@ import {
   MoonWaningCrescent,
 } from "mdi-material-ui";
 import MenuIcon from "mdi-material-ui/Menu";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../../redux/features/theme/ThemeSlice";
+import CustomSearchBar from "../customSearchBar";
+
 function Header() {
-  const [lightOff, setLightOff] = useState(false)
+  const dispatch = useDispatch();
+  const themeReducer = useSelector((state) => state.theme);
+  const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const toggleSearchBar = () => setShowSearchBar(!showSearchBar);
   return (
     <Box
       sx={{
         width: "100%",
         height: "70px",
-      }}>
+        position: "fixed",
+        transform: "translateY(0)",
+      }}
+    >
       <Box
         sx={{
           width: "80%",
           display: "flex",
           justifyContent: "space-between",
           margin: "auto",
-        }}>
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -40,7 +52,8 @@ function Header() {
             flexDirection: "row",
             lineHeight: "70px",
             width: "auto",
-          }}>
+          }}
+        >
           <HexagonMultiple
             sx={{
               width: "50px",
@@ -63,7 +76,8 @@ function Header() {
               // webkitTextFillColor: "transparent",
               // mozBackgroundClip: "text",
               // mozTextFillColor: "transparent",
-            }}>
+            }}
+          >
             MoviesHive
           </Text>
         </Box>
@@ -74,18 +88,33 @@ function Header() {
             gap: 2,
             flexDirection: "row",
             justifyContent: "flex-end",
-          }}>
+          }}
+        >
           <Tooltip label="Search">
             <IconButton
+              onClick={toggleSearchBar}
               icon={<Magnify />}
               sx={{ background: "transparent", mt: "15px" }}
               _hover={{ color: "#037ade" }}
             />
           </Tooltip>
 
-          <Tooltip label={lightOff ? "Turn On The Light":"Turn Off The Light"}>
+          <Tooltip
+            label={
+              themeReducer?.theme === "dark"
+                ? "Turn On The Light"
+                : "Turn Off The Light"
+            }
+          >
             <IconButton
-              icon={lightOff ? <WeatherSunny /> : <MoonWaningCrescent/>}
+              onClick={() => dispatch(toggleTheme())}
+              icon={
+                themeReducer?.theme === "dark" ? (
+                  <WeatherSunny />
+                ) : (
+                  <MoonWaningCrescent />
+                )
+              }
               sx={{ background: "transparent", mt: "15px" }}
               _hover={{ color: "#037ade" }}
             />
@@ -101,7 +130,8 @@ function Header() {
                 letterSpacing: "2px",
                 color: "#303740",
                 mt: "15px",
-              }}>
+              }}
+            >
               Movies
             </Button>
             <Button
@@ -113,7 +143,8 @@ function Header() {
                 letterSpacing: "2px",
                 color: "#303740",
                 mt: "15px",
-              }}>
+              }}
+            >
               TV Shows
             </Button>
           </Show>
@@ -133,23 +164,29 @@ function Header() {
                   sx={{
                     fontWeight: 400,
                     fontFamily: "Bebas Neue, sans-serif",
-                  }}>
+                  }}
+                >
                   Movies
                 </MenuItem>
                 <MenuItem
                   sx={{
                     fontWeight: 400,
                     fontFamily: "Bebas Neue, sans-serif",
-                  }}>
+                  }}
+                >
                   TV Shows
                 </MenuItem>
               </MenuList>
             </Menu>
           </Show>
         </Box>
-
       </Box>
-      
+      {showSearchBar && (
+        <CustomSearchBar
+          showSearchBar={showSearchBar}
+          toggleSearchBar={toggleSearchBar}
+        />
+      )}
     </Box>
   );
 }
