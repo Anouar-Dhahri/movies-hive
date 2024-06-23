@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, IconButton, Button, Tooltip  } from "@chakra-ui/react";
+import { Box, IconButton, Button, Tooltip } from "@chakra-ui/react";
 import { Facebook, Instagram, Linkedin, AlphaX } from "mdi-material-ui";
+
 function Footer() {
   return (
     <Box
@@ -12,14 +13,17 @@ function Footer() {
         bottom: 0,
         gap: "1rem",
         p: "1rem",
-      }}>
+        zIndex: 9999,
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           gap: "2rem",
           justifyContent: "center",
           flexDirection: "row",
-        }}>
+        }}
+      >
         <Button
           variant="ghost"
           sx={{
@@ -29,7 +33,8 @@ function Footer() {
             letterSpacing: "2px",
             color: "#303740",
             mt: "15px",
-          }}>
+          }}
+        >
           Terms Of Use
         </Button>
         <Button
@@ -41,7 +46,8 @@ function Footer() {
             letterSpacing: "2px",
             color: "#303740",
             mt: "15px",
-          }}>
+          }}
+        >
           Privacy-Policy
         </Button>
         <Button
@@ -53,7 +59,8 @@ function Footer() {
             letterSpacing: "2px",
             color: "#303740",
             mt: "15px",
-          }}>
+          }}
+        >
           About
         </Button>
         <Button
@@ -65,7 +72,8 @@ function Footer() {
             letterSpacing: "2px",
             color: "#303740",
             mt: "15px",
-          }}>
+          }}
+        >
           Blog
         </Button>
         <Button
@@ -77,7 +85,8 @@ function Footer() {
             letterSpacing: "2px",
             color: "#303740",
             mt: "15px",
-          }}>
+          }}
+        >
           FAQ
         </Button>
       </Box>
@@ -92,7 +101,8 @@ function Footer() {
           fontSize: "1rem",
           wordSpacing: "5px",
           textAlign: "center",
-        }}>
+        }}
+      >
         Fusce ut tortor vehicula, eleifend dui sed, bibendum libero. Etiam eu
         arcu in augue tempus congue. Cras id purus quam. Maecenas aliquet nulla
         nec diam tempus commodo. Cras dignissim tellus orci, non congue massa
@@ -114,7 +124,8 @@ function Footer() {
           gap: "2rem",
           justifyContent: "center",
           flexDirection: "row",
-        }}>
+        }}
+      >
         <IconButton
           icon={<Facebook />}
           sx={{ background: "transparent", border: "1px solid #000" }}

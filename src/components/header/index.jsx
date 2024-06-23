@@ -19,22 +19,53 @@ import {
 } from "mdi-material-ui";
 import MenuIcon from "mdi-material-ui/Menu";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../../redux/features/theme/ThemeSlice";
-import CustomSearchBar from "../customSearchBar";
+import { toggleTheme } from "reduxStore/features/theme/ThemeSlice";
+import CustomSearchBar from "components/customSearchBar";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const themeReducer = useSelector((state) => state.theme);
+
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  const controlNavbar = () => {
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    if (lastScrollY > 200 && showSearchBar) {
+      toggleSearchBar();
+    }
+    window.addEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
 
   const toggleSearchBar = () => setShowSearchBar(!showSearchBar);
+  console.log("lastScrollY==>", lastScrollY);
   return (
     <Box
       sx={{
+        display: lastScrollY > 200 ? "none" : "block",
         width: "100%",
         height: "70px",
         position: "fixed",
         transform: "translateY(0)",
+        zIndex: 1,
+        background: "rgba(0, 0, 0, 0.25)",
+        backdropFilter: "blur(3.5px)",
+        transition: "all ease 0.5s",
+        zIndex: 2,
+        //
       }}
     >
       <Box
@@ -59,6 +90,7 @@ function Header() {
               width: "50px",
               height: "50px",
               mt: "10px",
+              color: "#FFE53B",
             }}
           />
           <Text
@@ -67,15 +99,10 @@ function Header() {
               fontWeight: 500,
               fontFamily: "Bebas Neue, sans-serif",
               letterSpacing: "5px",
-              // backgroundColor: "#03e5b7",
-              // backgroundImage:
-              //   "linear-gradient(315deg, #03e5b7 0%, #037ade 74%)",
-              // backgroundSize: "100%",
-              // backgroundRepeat: "repeat",
-              // webkitBackgroundClip: "text",
-              // webkitTextFillColor: "transparent",
-              // mozBackgroundClip: "text",
-              // mozTextFillColor: "transparent",
+              backgroundColor: "#FFE53B",
+              backgroundImage:
+                "linear-gradient(147deg, #FFE53B 0%, #FF2525 74%",
+              backgroundClip: "text",
             }}
           >
             MoviesHive
@@ -90,12 +117,19 @@ function Header() {
             justifyContent: "flex-end",
           }}
         >
-          <Tooltip label="Search">
+          <Tooltip
+            label="Search"
+            sx={{
+              fontFamily: "Bebas Neue, sans-serif",
+              letterSpacing: "2px",
+            }}
+          >
             <IconButton
               onClick={toggleSearchBar}
               icon={<Magnify />}
-              sx={{ background: "transparent", mt: "15px" }}
-              _hover={{ color: "#037ade" }}
+              sx={{ background: "transparent", mt: "15px", color: "#FFF" }}
+              _hover={{ color: "#FFE53B" }}
+              _active={{ background: "transparent" }}
             />
           </Tooltip>
 
@@ -105,6 +139,10 @@ function Header() {
                 ? "Turn On The Light"
                 : "Turn Off The Light"
             }
+            sx={{
+              fontFamily: "Bebas Neue, sans-serif",
+              letterSpacing: "2px",
+            }}
           >
             <IconButton
               onClick={() => dispatch(toggleTheme())}
@@ -115,8 +153,9 @@ function Header() {
                   <MoonWaningCrescent />
                 )
               }
-              sx={{ background: "transparent", mt: "15px" }}
-              _hover={{ color: "#037ade" }}
+              sx={{ background: "transparent", mt: "15px", color: "#FFF" }}
+              _hover={{ color: "#FFE53B" }}
+              _active={{ background: "transparent" }}
             />
           </Tooltip>
 
@@ -128,9 +167,10 @@ function Header() {
                 fontFamily: "Bebas Neue, sans-serif",
                 fontSize: "1.5rem",
                 letterSpacing: "2px",
-                color: "#303740",
+                color: "#FFF",
                 mt: "15px",
               }}
+              _hover={{ backgroundColor: "transparent", color: "#FFE53B" }}
             >
               Movies
             </Button>
@@ -141,9 +181,10 @@ function Header() {
                 fontFamily: "Bebas Neue, sans-serif",
                 fontSize: "1.5rem",
                 letterSpacing: "2px",
-                color: "#303740",
+                color: "#FFF",
                 mt: "15px",
               }}
+              _hover={{ backgroundColor: "transparent", color: "#FFE53B" }}
             >
               TV Shows
             </Button>
@@ -153,10 +194,12 @@ function Header() {
               <MenuButton
                 as={IconButton}
                 icon={<MenuIcon />}
-                _hover={{ color: "#037ade" }}
+                _hover={{ color: "#FFE53B" }}
+                _active={{ background: "transparent" }}
                 sx={{
                   background: "transparent",
                   mt: "15px",
+                  color: "#FFF",
                 }}
               />
               <MenuList>

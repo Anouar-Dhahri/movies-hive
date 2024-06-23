@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
+import { HeroBanner } from "../../components";
 function Home() {
-  const renderDummyData = () => {
-    const elements = [];
-    for (let i = 0; i <= 100; i++) {
-      elements.push(
-        <>
-          <span key={i} style={{ textAlign: "center" }}>
-            TEXT {i}
-          </span>{" "}
-          <br />
-        </>
-      );
-    }
-    return elements;
-  };
-  console.log("renderDummyData==>", renderDummyData);
-  return (
-    <div
-      style={{ width: "100%", border: "1px solid #000", textAlign: "center" }}
-    >
-      {renderDummyData()}
-    </div>
-  );
+  return <HeroBanner />;
 }
 
 export default Home;

@@ -3,6 +3,7 @@ import { Box, IconButton, Input } from "@chakra-ui/react";
 import { Close } from "mdi-material-ui";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+
 function CustomSearchBar({ showSearchBar, toggleSearchBar }) {
   const themeReducer = useSelector((state) => state.theme);
   return (
