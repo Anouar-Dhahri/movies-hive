@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Image,
-  Spinner,
-  Text,
-  Input,
-  Button,
-  CircularProgress,
-} from "@chakra-ui/react";
+import { Box, Image, Spinner, Text, Input, Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { upcomingMovies } from "../../apis/movies";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +11,7 @@ function HeroBanner() {
   const dispatch = useDispatch();
   const dataReducer = useSelector((state) => state.data);
   const moviesReducer = useSelector((state) => state.movies);
-  // const themeReducer = useSelector((state) => state.theme);
+  const themeReducer = useSelector((state) => state.theme);
 
   const navigate = useNavigate();
 
@@ -85,6 +77,7 @@ function HeroBanner() {
             backdropFilter: "blur(3.5px)",
             "-webkit-backdrop-filter": "blur(3.5px)",
           }}
+          loading="lazy"
           src={dataReducer?.url?.backdrop + randomBackdrop}
         />
       )}
@@ -175,21 +168,18 @@ function HeroBanner() {
           </Button>
         </Box>
       </Box>
-      <CircularProgress
-        color="orange"
-        isIndeterminate
-        thickness="4px"
-        width="40px"
-        height="40px"
+      <Box
         sx={{
+          width: "100%",
+          height: "50px",
+          background: `linear-gradient(180deg,rgba(4, 21, 45, 0) 0%,${
+            themeReducer?.theme === "dark" ? "#1a1e2c" : "#fff"
+          } 79.17%)`,
           position: "absolute",
-          bottom: "20px",
-          right: "20px",
+          bottom: 0,
+          left: 0,
         }}
-        min={0}
-        max={100}
-      />
-      {/* <LoadingBar color={"orange"} progress={progressBarValue}/> */}
+      ></Box>
     </Box>
   );
 }

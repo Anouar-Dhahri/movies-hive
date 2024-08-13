@@ -51,7 +51,7 @@ function Header() {
   }, [lastScrollY]);
 
   const toggleSearchBar = () => setShowSearchBar(!showSearchBar);
-  console.log("lastScrollY==>", lastScrollY);
+
   return (
     <Box
       sx={{
