@@ -22,7 +22,6 @@ import moment from "moment";
 import { assets } from "assets";
 
 function CustomSwiper({
-  loading,
   title,
   swiperActions,
   actionValues,
@@ -227,8 +226,7 @@ function CustomSwiper({
             },
           }}
         >
-          {!loading &&
-            data?.length > 0 &&
+          {data?.length > 0 &&
             data?.map((item, idx) => (
               <SwiperSlide
                 key={idx}
@@ -333,8 +331,7 @@ function CustomSwiper({
               </SwiperSlide>
             ))}
 
-          {(loading &&
-            data?.length === 0) &&
+          {data?.length === 0 &&
             Array.from({ length: 5 }).map((_, idx) => (
               <SwiperSlide key={idx} className="home-swiper-slide">
                 <Box

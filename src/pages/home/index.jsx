@@ -47,8 +47,8 @@ function Home() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 10 }}>
       <HeroBanner />
+
       <CustomSwiper
-        loading={moviesReducer?.loading}
         title={"Trending"}
         swiperActions={[
           { name: "trendingAction", title: "today", value: "day" },
@@ -60,13 +60,6 @@ function Home() {
       />
 
       <CustomSwiper
-        loading={
-          actionValues.popularAction === "movie"
-            ? moviesReducer?.loading
-            : tvShowsReducer.popularAction === "tv"
-            ? tvShowsReducer?.loading
-            : false
-        }
         title={"What's Popular"}
         swiperActions={[
           { name: "popularAction", title: "movies", value: "movie" },
@@ -82,13 +75,6 @@ function Home() {
       />
 
       <CustomSwiper
-        loading={
-          actionValues.topRatedAction === "movie"
-            ? moviesReducer?.loading
-            : tvShowsReducer.topRatedAction === "tv"
-            ? tvShowsReducer?.loading
-            : false
-        }
         title={"Top Rated"}
         swiperActions={[
           { name: "topRatedAction", title: "movies", value: "movie" },
