@@ -44,7 +44,7 @@ const DataSlice = createSlice({
       })
       .addCase(getGenres.fulfilled, (state, action) => {
         state.loading = false;
-        state.genres = action.payload.results;
+        state.genres = action.payload;
         state.success = true;
         state.message = "Movies genres retrieved successfully";
       })

@@ -62,112 +62,115 @@ function HeroBanner() {
         position: "relative",
       }}
     >
-      {moviesReducer?.loading ? (
-        <Spinner size="xl" />
+      {moviesReducer?.loading && moviesReducer?.movies?.length === 0 ? (
+        <Spinner size="xl" sx={{ position: "absolute", zIndex: 999 }} />
       ) : (
-        <Image
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            overflow: "hidden",
-            background: "rgba(0, 0, 0, 0.25)",
-            backdropFilter: "blur(3.5px)",
-            "-webkit-backdrop-filter": "blur(3.5px)",
-          }}
-          loading="lazy"
-          src={dataReducer?.url?.backdrop + randomBackdrop}
-        />
-      )}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          color: "#FFF",
-          textAlign: "center",
-          position: "relative",
-          maxWidth: "800px",
-          margin: " 0 auto",
-        }}
-      >
-        <Text
-          fontSize={["60x", "60px", "60px", "70px", "70px"]}
-          sx={{
-            fontWeight: 700,
-            marginBottom: "10px",
-            fontFamily: "Bebas Neue, sans-serif",
-          }}
-        >
-          Welcome.
-        </Text>
-        <Text
-          fontSize={["25x", "25px", "30px", "40px", "40px"]}
-          sx={{
-            fontWeight: 500,
-            marginBottom: "40px",
-            fontFamily: "Bebas Neue, sans-serif",
-          }}
-        >
-          Millions of movies, TV shows and people to discover. Explore now.
-        </Text>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <Input
-            type="search"
-            placeholder="Search for a movie or tv show...."
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyUp={searchQueryHandler}
+        <>
+          <Image
             sx={{
-              width: [
-                "calc(100% - 100px)",
-                "calc(100% - 100px)",
-                "calc(100% - 100px)",
-                "calc(100% - 150px)",
-                "calc(100% - 150px)",
-              ],
-              height: "60px",
-              backgroundColor: "#FFF",
-              border: "none",
-              borderRadius: "30px 0 0 30px",
-              padding: "0 15px",
-              fontSize: "20px",
-              color: "#000",
-              fontFamily: "Bebas Neue, sans-serif",
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              overflow: "hidden",
+              background: "rgba(0, 0, 0, 0.25)",
+              backdropFilter: "blur(3.5px)",
+              "-webkit-backdrop-filter": "blur(3.5px)",
             }}
-            _focusVisible={{ outline: "none" }}
+            loading="lazy"
+            src={dataReducer?.url?.backdrop + randomBackdrop}
           />
-          <Button
+          <Box
             sx={{
-              width: "100px",
-              height: "60px",
-              backgroundColor: "#222",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               color: "#FFF",
-              outline: 0,
-              border: 0,
-              borderRadius: "0 30px 30px 0",
-              fontSize: "20px",
-              lineHeight: "60px",
-              cursor: "pointer",
-              letterSpacing: "2px",
-              fontFamily: "Bebas Neue, sans-serif",
-              padding: "0 1rem 0 1rem",
+              textAlign: "center",
+              position: "relative",
+              maxWidth: "800px",
+              margin: " 0 auto",
             }}
-            _hover={{ color: "#FFE53B" }}
-            _active={{ background: "transparent" }}
-            onClick={searchQueryHandler}
           >
-            Search
-          </Button>
-        </Box>
-      </Box>
+            <Text
+              fontSize={["60x", "60px", "60px", "70px", "70px"]}
+              sx={{
+                fontWeight: 700,
+                marginBottom: "10px",
+                fontFamily: "Bebas Neue, sans-serif",
+              }}
+            >
+              Welcome.
+            </Text>
+            <Text
+              fontSize={["25x", "25px", "30px", "40px", "40px"]}
+              sx={{
+                fontWeight: 500,
+                marginBottom: "40px",
+                fontFamily: "Bebas Neue, sans-serif",
+              }}
+            >
+              Millions of movies, TV shows and people to discover. Explore now.
+            </Text>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Input
+                type="search"
+                placeholder="Search for a movie or tv show...."
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyUp={searchQueryHandler}
+                sx={{
+                  width: [
+                    "calc(100% - 100px)",
+                    "calc(100% - 100px)",
+                    "calc(100% - 100px)",
+                    "calc(100% - 150px)",
+                    "calc(100% - 150px)",
+                  ],
+                  height: "60px",
+                  backgroundColor: "#FFF",
+                  border: "none",
+                  borderRadius: "30px 0 0 30px",
+                  padding: "0 15px",
+                  fontSize: "20px",
+                  color: "#000",
+                  fontFamily: "Bebas Neue, sans-serif",
+                }}
+                _focusVisible={{ outline: "none" }}
+              />
+              <Button
+                sx={{
+                  width: "100px",
+                  height: "60px",
+                  backgroundColor: "#222",
+                  color: "#FFF",
+                  outline: 0,
+                  border: 0,
+                  borderRadius: "0 30px 30px 0",
+                  fontSize: "20px",
+                  lineHeight: "60px",
+                  cursor: "pointer",
+                  letterSpacing: "2px",
+                  fontFamily: "Bebas Neue, sans-serif",
+                  padding: "0 1rem 0 1rem",
+                }}
+                _hover={{ color: "#FFE53B" }}
+                _active={{ background: "transparent" }}
+                onClick={searchQueryHandler}
+              >
+                Search
+              </Button>
+            </Box>
+          </Box>
+        </>
+      )}
+
       <Box
         sx={{
           width: "100%",

@@ -8,7 +8,7 @@ function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getConfig());
-    dispatch(getGenres());
+    dispatch(getGenres(["movie", "tv"]));
   }, []);
   return (
     <ChakraProvider>

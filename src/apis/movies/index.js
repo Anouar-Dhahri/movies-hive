@@ -18,3 +18,20 @@ export const upcomingMovies = createAsyncThunk(
     }
   }
 );
+
+export const trendingMovies = createAsyncThunk(
+  "movies/trending",
+  async (limit, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/trending/movie/${limit}`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
