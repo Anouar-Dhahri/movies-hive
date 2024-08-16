@@ -227,9 +227,9 @@ function CustomSwiper({
             },
           }}
         >
-          {(!loading) &&
+          {!loading &&
             data?.length > 0 &&
-            data?.map((movie, idx) => (
+            data?.map((item, idx) => (
               <SwiperSlide
                 key={idx}
                 onClick={() => console.log("Swiper")}
@@ -249,15 +249,16 @@ function CustomSwiper({
                   >
                     <Image
                       src={
-                        movie?.poster_path
-                          ? `${dataReducer?.url?.poster + movie?.poster_path}`
-                          : !movie?.poster_path && movie?.backdrop_path
+                        item?.poster_path
+                          ? `${dataReducer?.url?.poster + item?.poster_path}`
+                          : !item?.poster_path && item?.backdrop_path
                           ? `${
-                              dataReducer?.url?.backdrop + movie?.backdrop_path
+                              dataReducer?.url?.backdrop + item?.backdrop_path
                             }`
                           : assets.fileNotFound
                       }
                       alt=""
+                      loading="lazy"
                       sx={{
                         width: "90%",
                         height: "300px",
@@ -269,11 +270,11 @@ function CustomSwiper({
                     />
 
                     <CircularProgress
-                      value={movie?.vote_average * 10}
+                      value={item?.vote_average * 10}
                       color={
-                        movie?.vote_average < 5
+                        item?.vote_average < 5
                           ? "red"
-                          : movie?.vote_average < 7
+                          : item?.vote_average < 7
                           ? "orange"
                           : "green"
                       }
@@ -286,7 +287,7 @@ function CustomSwiper({
                       }}
                     >
                       <CircularProgressLabel>
-                        {movie?.vote_average.toFixed(1)}
+                        {item?.vote_average.toFixed(1)}
                       </CircularProgressLabel>
                     </CircularProgress>
                   </Box>
@@ -312,7 +313,7 @@ function CustomSwiper({
                         fontWeight: 700,
                       }}
                     >
-                      {movie?.title}
+                      {item?.title || item?.name}
                     </Text>
                     <Text
                       sx={{
@@ -323,7 +324,9 @@ function CustomSwiper({
                         fontWeight: 500,
                       }}
                     >
-                      {moment(movie?.release_date).format("MMM D, YYYY")}
+                      {moment(
+                        item?.release_date || item?.first_air_date
+                      ).format("MMM D, YYYY")}
                     </Text>
                   </Box>
                 </Box>

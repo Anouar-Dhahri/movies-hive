@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { upcomingMovies, trendingMovies } from "apis/movies";
+import { upcomingMovies, trendingMovies, topRatedMovies } from "apis/movies";
 
 const MoviesSlice = createSlice({
   name: "movies",
@@ -8,6 +8,7 @@ const MoviesSlice = createSlice({
     movies: [],
     movie: {},
     trending: [],
+    topRated: [],
     success: false,
     message: null,
   },
@@ -43,6 +44,23 @@ const MoviesSlice = createSlice({
         state.message = "Trending movies retrieved successfully";
       })
       .addCase(trendingMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+        state.success = false;
+        state.message = "Error retrieving the trending movies list from TMDB";
+      })
+      // GET TRENDING MOVIES
+      .addCase(topRatedMovies.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(topRatedMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.topRated = action.payload.results;
+        state.success = true;
+        state.message = "Top rated movies retrieved successfully";
+      })
+      .addCase(topRatedMovies.rejected, (state, action) => {
         state.loading = false;
         state.message = action.payload;
         state.success = false;

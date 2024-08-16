@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { HeroBanner, CustomSwiper } from "../../components";
 import { Box } from "@chakra-ui/react";
-import { trendingMovies } from "apis/movies";
+import { trendingMovies, topRatedMovies } from "apis/movies";
+import { topRatedTvShows } from "apis/tvShows";
 import { useSelector, useDispatch } from "react-redux";
 
 function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const moviesReducer = useSelector((state) => state.movies);
+  const tvShowsReducer = useSelector((state) => state.tvShows);
 
   const [actionValues, setActionValues] = useState({
     trendingAction: "day",
@@ -14,11 +16,20 @@ function Home() {
     topRatedAction: "movie",
   });
 
+  console.log("actionValues==>", actionValues);
   useEffect(() => {
     if (actionValues.trendingAction) {
       dispatch(trendingMovies(actionValues.trendingAction));
     }
   }, [actionValues.trendingAction]);
+
+  useEffect(() => {
+    if (actionValues.topRatedAction === "movie") {
+      dispatch(topRatedMovies());
+    } else {
+      dispatch(topRatedTvShows());
+    }
+  }, [actionValues.topRatedAction]);
 
   const handleActionsValues = (event) => {
     const { name, value } = event.target;
@@ -41,6 +52,13 @@ function Home() {
       />
 
       <CustomSwiper
+        loading={
+          actionValues.topRatedAction === "movie"
+            ? moviesReducer?.loading
+            : tvShowsReducer.topRatedAction === "tv"
+            ? tvShowsReducer?.loading
+            : false
+        }
         title={"What's Popular"}
         swiperActions={[
           { name: "popularAction", title: "movies", value: "movie" },
@@ -52,6 +70,13 @@ function Home() {
       />
 
       <CustomSwiper
+        loading={
+          actionValues.topRatedAction === "movie"
+            ? moviesReducer?.loading
+            : tvShowsReducer.topRatedAction === "tv"
+            ? tvShowsReducer?.loading
+            : false
+        }
         title={"Top Rated"}
         swiperActions={[
           { name: "topRatedAction", title: "movies", value: "movie" },
@@ -59,7 +84,11 @@ function Home() {
         ]}
         actionValues={actionValues}
         handleActionsValues={handleActionsValues}
-        data={[]}
+        data={
+          actionValues.topRatedAction === "movie"
+            ? moviesReducer?.topRated
+            : tvShowsReducer?.topRated
+        }
       />
     </Box>
   );
