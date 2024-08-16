@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { HeroBanner, CustomSwiper } from "../../components";
 import { Box } from "@chakra-ui/react";
-import { trendingMovies, topRatedMovies } from "apis/movies";
-import { topRatedTvShows } from "apis/tvShows";
+import { trendingMovies, topRatedMovies, popularMovies } from "apis/movies";
+import { topRatedTvShows, popularTvShows } from "apis/tvShows";
 import { useSelector, useDispatch } from "react-redux";
 
 function Home() {
@@ -22,6 +22,14 @@ function Home() {
       dispatch(trendingMovies(actionValues.trendingAction));
     }
   }, [actionValues.trendingAction]);
+
+  useEffect(() => {
+    if (actionValues.popularAction === "movie") {
+      dispatch(popularMovies());
+    } else {
+      dispatch(popularTvShows());
+    }
+  }, [actionValues.popularAction]);
 
   useEffect(() => {
     if (actionValues.topRatedAction === "movie") {
@@ -53,9 +61,9 @@ function Home() {
 
       <CustomSwiper
         loading={
-          actionValues.topRatedAction === "movie"
+          actionValues.popularAction === "movie"
             ? moviesReducer?.loading
-            : tvShowsReducer.topRatedAction === "tv"
+            : tvShowsReducer.popularAction === "tv"
             ? tvShowsReducer?.loading
             : false
         }
@@ -66,7 +74,11 @@ function Home() {
         ]}
         actionValues={actionValues}
         handleActionsValues={handleActionsValues}
-        data={[]}
+        data={
+          actionValues.popularAction === "movie"
+            ? moviesReducer?.popular
+            : tvShowsReducer?.popular
+        }
       />
 
       <CustomSwiper

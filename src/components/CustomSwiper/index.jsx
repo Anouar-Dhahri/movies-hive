@@ -333,8 +333,8 @@ function CustomSwiper({
               </SwiperSlide>
             ))}
 
-          {(loading || !loading) &&
-            data?.length === 0 &&
+          {(loading &&
+            data?.length === 0) &&
             Array.from({ length: 5 }).map((_, idx) => (
               <SwiperSlide key={idx} className="home-swiper-slide">
                 <Box

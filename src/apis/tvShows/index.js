@@ -18,3 +18,20 @@ export const topRatedTvShows = createAsyncThunk(
     }
   }
 );
+
+export const popularTvShows = createAsyncThunk(
+  "tv/popular",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/tv/popular`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

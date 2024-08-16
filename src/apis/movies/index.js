@@ -52,3 +52,20 @@ export const topRatedMovies = createAsyncThunk(
     }
   }
 );
+
+export const popularMovies = createAsyncThunk(
+  "movies/popular",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/movie/popular`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

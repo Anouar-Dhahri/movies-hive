@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { topRatedTvShows } from "apis/tvShows";
+import { topRatedTvShows, popularTvShows } from "apis/tvShows";
 
 const TvShowsSlice = createSlice({
   name: "tvShows",
@@ -9,6 +9,7 @@ const TvShowsSlice = createSlice({
     tvShow: {},
     trending: [],
     topRated: [],
+    popular: [],
     success: false,
     message: null,
   },
@@ -31,6 +32,23 @@ const TvShowsSlice = createSlice({
         state.message = action.payload;
         state.success = false;
         state.message = "Error retrieving the trending tv shows list from TMDB";
+      })
+      // GET POPULAR TV SHOWS
+      .addCase(popularTvShows.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(popularTvShows.fulfilled, (state, action) => {
+        state.loading = false;
+        state.popular = action.payload.results;
+        state.success = true;
+        state.message = "Popular tv shows retrieved successfully";
+      })
+      .addCase(popularTvShows.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+        state.success = false;
+        state.message = "Error retrieving the popular tv shows list from TMDB";
       });
   },
 });
