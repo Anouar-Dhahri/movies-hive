@@ -7,8 +7,6 @@ import {
   CircularProgress,
   CircularProgressLabel,
   Skeleton,
-  SkeletonCircle,
-  SkeletonText,
 } from "@chakra-ui/react";
 import FireIcon from "mdi-material-ui/Fire";
 import { useSelector } from "react-redux";
@@ -19,7 +17,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import moment from "moment";
-import { assets } from "assets";
+import posterNotFound from "assets/8030430_3828535.svg";
 
 function CustomSwiper({
   title,
@@ -253,7 +251,7 @@ function CustomSwiper({
                           ? `${
                               dataReducer?.url?.backdrop + item?.backdrop_path
                             }`
-                          : assets.fileNotFound
+                          : posterNotFound
                       }
                       alt=""
                       loading="lazy"

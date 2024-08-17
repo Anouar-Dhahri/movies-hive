@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, IconButton, Input, Slide, useDisclosure } from "@chakra-ui/react";
 import { Close } from "mdi-material-ui";
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function CustomSearchBar({ showSearchBar, toggleSearchBar }) {
   const { isOpen, onToggle } = useDisclosure();
+  const navigate = useNavigate();
   const themeReducer = useSelector((state) => state.theme);
+  const [query, setQuery] = useState("");
 
+  const searchQueryHandler = (event) => {
+    if (event.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
+      setTimeout(() => {
+        toggleSearchBar();
+      }, 1000);
+    }
+  };
   return (
     <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
       <Box
@@ -25,6 +35,8 @@ function CustomSearchBar({ showSearchBar, toggleSearchBar }) {
       >
         <Input
           type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           sx={{
             height: "50px",
             border: "none",
@@ -36,6 +48,7 @@ function CustomSearchBar({ showSearchBar, toggleSearchBar }) {
           }}
           placeholder="Search for a movie or tv show"
           _focusVisible={{ outline: "none" }}
+          onKeyUp={searchQueryHandler}
         />
         <IconButton
           onClick={toggleSearchBar}
