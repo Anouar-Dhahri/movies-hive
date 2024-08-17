@@ -16,7 +16,6 @@ function Home() {
     topRatedAction: "movie",
   });
 
-  console.log("actionValues==>", actionValues);
   useEffect(() => {
     if (actionValues.trendingAction) {
       dispatch(trendingMovies(actionValues.trendingAction));

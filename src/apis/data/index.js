@@ -56,3 +56,20 @@ export const getGenres = createAsyncThunk(
     }
   }
 );
+
+export const fetchData = createAsyncThunk(
+  "data/fetch",
+  async ({ query, page }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/search/multi?query=${query}&page=${page}`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

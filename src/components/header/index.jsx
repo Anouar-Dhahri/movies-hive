@@ -104,6 +104,8 @@ function Header() {
                 "linear-gradient(147deg, #FFE53B 0%, #FF2525 74%",
               backgroundClip: "text",
             }}
+            _hover={{ cursor: "pointer" }}
+            onClick={() => navigate("/")}
           >
             MoviesHive
           </Text>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getGenres, getConfig } from "apis/data";
+import { getGenres, getConfig, fetchData } from "apis/data";
 
 const DataSlice = createSlice({
   name: "data",
@@ -11,6 +11,7 @@ const DataSlice = createSlice({
       profile: "",
     },
     genres: [],
+    fetchedData: [],
     success: false,
     message: null,
   },
@@ -33,7 +34,6 @@ const DataSlice = createSlice({
       })
       .addCase(getConfig.rejected, (state, action) => {
         state.loading = false;
-        state.message = action.payload;
         state.success = false;
         state.message = "Error retrieving the Configuration from TMDB";
       })
@@ -50,7 +50,22 @@ const DataSlice = createSlice({
       })
       .addCase(getGenres.rejected, (state, action) => {
         state.loading = false;
-        state.message = action.payload;
+        state.success = false;
+        state.message = "Error retrieving the upcoming movies genres from TMDB";
+      })
+      // FETCH DATA
+      .addCase(fetchData.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.fetchedData = [...state.fetchedData, ...action.payload.results];
+        state.success = true;
+        state.message = "Fetched data retrieved successfully";
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        state.loading = false;
         state.success = false;
         state.message = "Error retrieving the upcoming movies genres from TMDB";
       });
