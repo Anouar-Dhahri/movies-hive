@@ -48,6 +48,7 @@ function Header() {
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
+    // eslint-disable-next-line
   }, [lastScrollY]);
 
   const toggleSearchBar = () => setShowSearchBar(!showSearchBar);
@@ -64,6 +65,7 @@ function Header() {
         background: "rgba(0, 0, 0, 0.25)",
         backdropFilter: "blur(3.5px)",
         transition: "all ease 0.5s",
+        // eslint-disable-next-line
         zIndex: 2,
         //
       }}
@@ -173,6 +175,7 @@ function Header() {
                 mt: "15px",
               }}
               _hover={{ backgroundColor: "transparent", color: "#FFE53B" }}
+              onClick={() => navigate(`/explore/${"movie"}`)}
             >
               Movies
             </Button>
@@ -187,6 +190,7 @@ function Header() {
                 mt: "15px",
               }}
               _hover={{ backgroundColor: "transparent", color: "#FFE53B" }}
+              onClick={() => navigate(`/explore/${"tv"}`)}
             >
               TV Shows
             </Button>
@@ -210,6 +214,7 @@ function Header() {
                     fontWeight: 400,
                     fontFamily: "Bebas Neue, sans-serif",
                   }}
+                  onClick={() => navigate(`/explore/${"movie"}`)}
                 >
                   Movies
                 </MenuItem>
@@ -218,6 +223,7 @@ function Header() {
                     fontWeight: 400,
                     fontFamily: "Bebas Neue, sans-serif",
                   }}
+                  onClick={() => navigate(`/explore/${"tv"}`)}
                 >
                   TV Shows
                 </MenuItem>

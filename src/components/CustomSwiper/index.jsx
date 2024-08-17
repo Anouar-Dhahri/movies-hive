@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import FireIcon from "mdi-material-ui/Fire";
 import { useSelector } from "react-redux";
-import { Navigation, Pagination, FreeMode } from "swiper/modules";
+import { Navigation, FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";

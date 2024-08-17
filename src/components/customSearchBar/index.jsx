@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function CustomSearchBar({ showSearchBar, toggleSearchBar }) {
+  // eslint-disable-next-line
   const { isOpen, onToggle } = useDisclosure();
   const navigate = useNavigate();
   const themeReducer = useSelector((state) => state.theme);

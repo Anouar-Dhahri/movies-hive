@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Button, Tooltip } from "@chakra-ui/react";
+import { Box, IconButton, Button } from "@chakra-ui/react";
 import { Facebook, Instagram, Linkedin, AlphaX } from "mdi-material-ui";
 
 function Footer() {

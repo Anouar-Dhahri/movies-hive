@@ -73,3 +73,20 @@ export const fetchData = createAsyncThunk(
     }
   }
 );
+
+export const discoverData = createAsyncThunk(
+  "data/discover",
+  async ({ mediaType, page }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/discover/${mediaType}?page=&page=${page}`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

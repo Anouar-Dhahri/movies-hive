@@ -95,7 +95,7 @@ function SearchResult() {
           <CustomCard key={idx} item={data} />
         ))}
       </Box>
-      {inView && data?.length === 0 && (
+      {inView && !isLoading && data?.length === 0 && (
         <Box
           sx={{
             display: "flex",
@@ -135,13 +135,13 @@ function SearchResult() {
           marginBottom: 5,
         }}
       >
-        {/* {inView && isLoading && (
+        {inView && isLoading && (
           <Spinner
             size="xl"
             _loading={isLoading}
             color={themeReducer?.theme === "light" ? "#000" : "#FFE53B"}
           />
-        )} */}
+        )}
       </Box>
     </Box>
   );

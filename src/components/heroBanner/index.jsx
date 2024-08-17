@@ -21,6 +21,7 @@ function HeroBanner() {
 
   useEffect(() => {
     dispatch(upcomingMovies());
+    // eslint-disable-next-line
   }, []);
 
   // const memorizedMovies = React.useMemo(moviesReducer?.movies);

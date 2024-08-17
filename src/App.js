@@ -9,6 +9,7 @@ function App() {
   React.useEffect(() => {
     dispatch(getConfig());
     dispatch(getGenres(["movie", "tv"]));
+    // eslint-disable-next-line
   }, []);
   return (
     <ChakraProvider>

@@ -20,6 +20,7 @@ function Home() {
     if (actionValues.trendingAction) {
       dispatch(trendingMovies(actionValues.trendingAction));
     }
+    // eslint-disable-next-line
   }, [actionValues.trendingAction]);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ function Home() {
     } else {
       dispatch(popularTvShows());
     }
+    // eslint-disable-next-line
   }, [actionValues.popularAction]);
 
   useEffect(() => {
@@ -36,6 +38,7 @@ function Home() {
     } else {
       dispatch(topRatedTvShows());
     }
+    // eslint-disable-next-line
   }, [actionValues.topRatedAction]);
 
   const handleActionsValues = (event) => {
