@@ -23,7 +23,7 @@ function MainLayout() {
       <Box sx={{ width: "100%", minHeight: "100vh" }}>
         <Outlet />
       </Box>
-      {/* <Footer /> */}
+      <Footer />
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Image, Spinner, Text, Input, Button } from "@chakra-ui/react";
+import { Box, Spinner, Text, } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
@@ -8,6 +8,7 @@ import { CustomCard } from "components";
 
 let page = 1;
 function SearchResult() {
+  
   const dispatch = useDispatch();
   const themeReducer = useSelector((state) => state.theme);
 
@@ -18,21 +19,23 @@ function SearchResult() {
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [storedQuery, setStoredQury] = useState("");
 
   useEffect(() => {
-    if (query.length > 0) {
-      dispatch(fetchData({ query: query, page: page })).then((result) => {
-        setIsLoading(false);
-      });
+    if (query.length > 0 && query !== storedQuery) {
+      setStoredQury(query);
+      setData([]);
     }
+  }, [query, storedQuery]);
 
+  useEffect(() => {
     if (inView) {
       setIsLoading(true);
       // Add a delay of 500 milliseconds
       const delay = 500;
 
       const timeoutId = setTimeout(() => {
-        dispatch(fetchData({ query: query, page: page })).then((res) => {
+        dispatch(fetchData({ query: storedQuery, page: page })).then((res) => {
           setData([...data, ...res.payload.results]);
           page++;
         });
@@ -43,6 +46,7 @@ function SearchResult() {
       // Clear the timeout if the component is unmounted or inView becomes false
       return () => clearTimeout(timeoutId);
     }
+    // eslint-disable-next-line
   }, [inView, data, isLoading]);
 
   return (
@@ -98,6 +102,7 @@ function SearchResult() {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
+          marginBottom: 5,
         }}
       >
         {inView && isLoading && (

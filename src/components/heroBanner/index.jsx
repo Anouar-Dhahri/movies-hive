@@ -144,6 +144,7 @@ function HeroBanner() {
                   fontSize: "20px",
                   color: "#000",
                   fontFamily: "Bebas Neue, sans-serif",
+                  letterSpacing: "2px",
                 }}
                 _focusVisible={{ outline: "none" }}
               />

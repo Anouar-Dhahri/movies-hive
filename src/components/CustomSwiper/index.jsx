@@ -63,6 +63,7 @@ function CustomSwiper({
         flexDirection: "column",
         gap: 6,
         width: "80%",
+        height: "500px",
         margin: "auto",
       }}
     >
