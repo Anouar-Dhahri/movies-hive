@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, Spinner, Text, } from "@chakra-ui/react";
+import { Box, Spinner, Text } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import { fetchData } from "apis/data";
 import { CustomCard } from "components";
+import MovieSearchIcon from "mdi-material-ui/MovieSearch";
 
 let page = 1;
 function SearchResult() {
-  
   const dispatch = useDispatch();
   const themeReducer = useSelector((state) => state.theme);
 
@@ -95,6 +95,36 @@ function SearchResult() {
           <CustomCard key={idx} item={data} />
         ))}
       </Box>
+      {inView && data?.length === 0 && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
+            width: "100%",
+            flexDirection: "column",
+          }}
+        >
+          <MovieSearchIcon
+            sx={{
+              width: "6rem",
+              height: "6rem",
+              color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
+            }}
+          />
+          <Text
+            sx={{
+              color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
+              fontFamily: "Bebas Neue, sans-serif",
+              letterSpacing: "2px",
+              fontSize: "3rem",
+              fontWeight: "bold",
+            }}
+          >
+            no movies found{" "}
+          </Text>
+        </Box>
+      )}
       <Box
         ref={ref}
         sx={{
@@ -105,13 +135,13 @@ function SearchResult() {
           marginBottom: 5,
         }}
       >
-        {inView && isLoading && (
+        {/* {inView && isLoading && (
           <Spinner
             size="xl"
             _loading={isLoading}
             color={themeReducer?.theme === "light" ? "#000" : "#FFE53B"}
           />
-        )}
+        )} */}
       </Box>
     </Box>
   );
