@@ -15,7 +15,7 @@ export const routes = [
     element: <Explore />,
   },
   {
-    path: "/:mediaType/:id",
+    path: "/:mediaType/:mediaId",
     element: <MediaDetails />,
   },
   {

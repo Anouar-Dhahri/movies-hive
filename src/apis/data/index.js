@@ -90,3 +90,71 @@ export const discoverData = createAsyncThunk(
     }
   }
 );
+
+export const similarData = createAsyncThunk(
+  "data/similar",
+  async ({ mediaType, mediaId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/${mediaType}/${mediaId}/similar`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const recommendationsData = createAsyncThunk(
+  "data/recommendations",
+  async ({ mediaType, mediaId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/${mediaType}/${mediaId}/recommendations`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const videosData = createAsyncThunk(
+  "data/videos",
+  async ({ mediaType, mediaId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/${mediaType}/${mediaId}/videos`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const creditsData = createAsyncThunk(
+  "data/credits",
+  async ({ mediaType, mediaId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/${mediaType}/${mediaId}/credits`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

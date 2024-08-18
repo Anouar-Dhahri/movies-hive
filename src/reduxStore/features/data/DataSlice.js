@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getGenres, getConfig, fetchData, discoverData } from "apis/data";
+import {
+  getGenres,
+  getConfig,
+  fetchData,
+  discoverData,
+  similarData,
+  recommendationsData,
+  videosData,
+  creditsData,
+} from "apis/data";
 
 const DataSlice = createSlice({
   name: "data",
@@ -12,7 +21,11 @@ const DataSlice = createSlice({
     },
     genres: [],
     fetchedData: [],
-    discoveredData:[],
+    discoveredData: [],
+    similar: [],
+    recommendations: [],
+    videos: [],
+    credits: {},
     success: false,
     message: null,
   },
@@ -77,14 +90,85 @@ const DataSlice = createSlice({
       })
       .addCase(discoverData.fulfilled, (state, action) => {
         state.loading = false;
-        state.discoveredData = [...state.discoveredData, ...action.payload.results];
+        state.discoveredData = [
+          ...state.discoveredData,
+          ...action.payload.results,
+        ];
         state.success = true;
-        state.message = "discovered data retrieved successfully";
+        state.message = "Discovered data retrieved successfully";
       })
       .addCase(discoverData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = "Error retrieving the data genres from TMDB";
+      })
+
+      // SIMILAR DATA
+      .addCase(similarData.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(similarData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.similar = action.payload.results;
+        state.success = true;
+        state.message = "Similar data retrieved successfully";
+      })
+      .addCase(similarData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = "Error retrieving the similar media from TMDB";
+      })
+
+      // RECOMMENDATION DATA
+      .addCase(recommendationsData.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(recommendationsData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.recommendations = action.payload.results;
+        state.success = true;
+        state.message = "Recommendations data retrieved successfully";
+      })
+      .addCase(recommendationsData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = "Error retrieving the recommendations data from TMDB";
+      })
+
+      // VIDEOS DATA
+      .addCase(videosData.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(videosData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.videos = action.payload.results;
+        state.success = true;
+        state.message = "Videos data retrieved successfully";
+      })
+      .addCase(videosData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = "Error retrieving Videos data from TMDB";
+      })
+
+      // CREDETS DATA
+      .addCase(creditsData.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(creditsData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.credits = action.payload;
+        state.success = true;
+        state.message = "credits data retrieved successfully";
+      })
+      .addCase(creditsData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = "Error retrieving credits data from TMDB";
       });
   },
 });

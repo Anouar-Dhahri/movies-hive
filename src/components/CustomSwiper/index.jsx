@@ -18,6 +18,7 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import moment from "moment";
 import posterNotFound from "assets/8030430_3828535.svg";
+import { useNavigate } from "react-router-dom";
 
 function CustomSwiper({
   title,
@@ -25,10 +26,11 @@ function CustomSwiper({
   actionValues,
   handleActionsValues,
   data,
+  mediaType,
 }) {
   const themeReducer = useSelector((state) => state.theme);
   const dataReducer = useSelector((state) => state.data);
-
+  const navigate = useNavigate();
   // const handleGenresNames = (genre_ids) => {
   //   const data = genre_ids?.slice(0, 2);
   //   return data.map((gId) => {
@@ -63,7 +65,7 @@ function CustomSwiper({
         flexDirection: "column",
         gap: 6,
         width: "80%",
-        height: "500px",
+        height: "550px",
         margin: "auto",
       }}
     >
@@ -243,6 +245,10 @@ function CustomSwiper({
                     sx={{
                       position: "relative",
                     }}
+                    _hover={{ cursor: "pointer" }}
+                    onClick={() =>
+                      navigate(`/${item?.media_type || mediaType}/${item?.id}`)
+                    }
                   >
                     <Image
                       src={

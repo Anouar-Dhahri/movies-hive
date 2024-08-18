@@ -59,6 +59,7 @@ function Home() {
         actionValues={actionValues}
         handleActionsValues={handleActionsValues}
         data={moviesReducer?.trending}
+        mediaType="movie"
       />
 
       <CustomSwiper
@@ -74,6 +75,7 @@ function Home() {
             ? moviesReducer?.popular
             : tvShowsReducer?.popular
         }
+        mediaType={actionValues.popularAction}
       />
 
       <CustomSwiper
@@ -89,6 +91,7 @@ function Home() {
             ? moviesReducer?.topRated
             : tvShowsReducer?.topRated
         }
+        mediaType={actionValues.topRatedAction}
       />
     </Box>
   );

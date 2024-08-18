@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import posterNotFound from "assets/8030430_3828535.svg";
 
-function CustomCard({ item }) {
+function CustomCard({ item, mediaType }) {
   const navigate = useNavigate();
 
   const themeReducer = useSelector((state) => state.theme);
@@ -22,12 +22,15 @@ function CustomCard({ item }) {
         flexDirection: "column",
         gap: 1,
       }}
-      onClick={() => detailsHandler(item?.type, item?.id)}
     >
       <Box
         sx={{
           position: "relative",
         }}
+        _hover={{ cursor: "pointer" }}
+        onClick={() =>
+          detailsHandler(item?.item?.media_type || mediaType, item?.id)
+        }
       >
         <Image
           src={

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import { discoverData } from "apis/data";
@@ -28,7 +28,6 @@ function Explore() {
   const themeReducer = useSelector((state) => state.theme);
   const dataReducer = useSelector((state) => state.data);
 
-  const navigate = useNavigate();
   const { mediaType } = useParams();
 
   const { ref, inView } = useInView();
@@ -173,7 +172,7 @@ function Explore() {
         // onClick={() => detailsHandler(item?.type, item?.id)}
       >
         {data?.map((data, idx) => (
-          <CustomCard key={idx} item={data} />
+          <CustomCard key={idx} item={data} mediaType={mediaType} />
         ))}
       </Box>
       {inView && !isLoading && data?.length === 0 && (
