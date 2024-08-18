@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Box, Spinner, Text } from "@chakra-ui/react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { discoverData } from "apis/data";
-import { CastSwiper, CustomSwiper } from "components";
+import { CastSwiper, CustomSwiper, VideoSwipper } from "components";
 import {
   similarData,
   recommendationsData,
@@ -13,7 +12,6 @@ import {
 
 function MediaDetails() {
   const dispatch = useDispatch();
-  const themeReducer = useSelector((state) => state.theme);
   const dataReducer = useSelector((state) => state.data);
 
   const { mediaType, mediaId } = useParams();
@@ -36,7 +34,14 @@ function MediaDetails() {
         flexDirection: "column",
       }}
     >
-      <CastSwiper data={dataReducer?.credits} url={dataReducer?.url?.profile} />
+      <CastSwiper
+        title={"Top Cast"}
+        data={dataReducer?.credits}
+        url={dataReducer?.url?.profile}
+      />
+
+      <VideoSwipper title={"Official Videos"} data={dataReducer?.videos} />
+      
       <CustomSwiper
         title={`Similar ${mediaType === "movie" ? "Movies" : "TV Shows"}`}
         data={dataReducer?.similar}

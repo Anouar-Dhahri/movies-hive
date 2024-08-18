@@ -239,6 +239,7 @@ function CustomSwiper({
                     display: "flex",
                     flexDirection: "column",
                     gap: 1,
+                    position: "relative",
                   }}
                 >
                   <Box

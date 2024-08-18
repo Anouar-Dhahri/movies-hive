@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Image, Text, Skeleton } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import FireIcon from "mdi-material-ui/Fire";
-import posterNotFound from "assets/8030430_3828535.svg";
-function CastSwiper({ data, url }) {
+import avatarIcon from "assets/avatar.png";
+function CastSwiper({ title, data, url }) {
   const themeReducer = useSelector((state) => state.theme);
   return (
     <Box
@@ -26,7 +26,7 @@ function CastSwiper({ data, url }) {
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
           }}
         >
-          {"Top Cast"}
+          {title}
         </Text>
         <FireIcon sx={{ width: "40px", height: "40px", mt: "5px" }} />
       </Box>
@@ -36,8 +36,8 @@ function CastSwiper({ data, url }) {
           display: "flex",
           flexDirection: "row",
           gap: 2,
-          overflowX: "hidden",
-          overflowY: "auto",
+          overflowX: "auto",
+          overflowY: "hidden",
         }}
       >
         {data &&
@@ -61,7 +61,7 @@ function CastSwiper({ data, url }) {
                 src={
                   url && obj?.profile_path
                     ? `${url + obj?.profile_path}`
-                    : posterNotFound
+                    : avatarIcon
                 }
                 alt={castId}
                 sx={{ width: "150px", height: "150px", borderRadius: "50%" }}
