@@ -8,6 +8,7 @@ import {
   recommendationsData,
   videosData,
   creditsData,
+  detailsData,
 } from "apis/data";
 
 const DataSlice = createSlice({
@@ -26,6 +27,7 @@ const DataSlice = createSlice({
     recommendations: [],
     videos: [],
     credits: {},
+    details: {},
     success: false,
     message: null,
   },
@@ -163,12 +165,29 @@ const DataSlice = createSlice({
         state.loading = false;
         state.credits = action.payload;
         state.success = true;
-        state.message = "credits data retrieved successfully";
+        state.message = "Credits data retrieved successfully";
       })
       .addCase(creditsData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = "Error retrieving credits data from TMDB";
+      })
+
+      // DETAILS DATA
+      .addCase(detailsData.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(detailsData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.details = action.payload;
+        state.success = true;
+        state.message = "Media details data retrieved successfully";
+      })
+      .addCase(detailsData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = "Error retrieving details data from TMDB";
       });
   },
 });

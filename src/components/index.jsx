@@ -7,3 +7,6 @@ export { default as CustomCard } from "./customCard";
 export { default as CastSwiper } from "./castSwiper";
 export { default as VideoSwipper } from "./videoSwipper";
 export { default as VideoPlayer } from "./videoPlayer";
+
+export { default as DetailsBanner } from "./detailsBanner";
+export { default as CustomTabs } from "./customCard";

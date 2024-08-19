@@ -16,7 +16,8 @@ function PageNotFound() {
         alignItems: "center",
         width: "100%",
         minHeight: "100vh",
-      }}>
+      }}
+    >
       <Image
         src={assets.notFound}
         alt="404 image not found"
@@ -26,8 +27,9 @@ function PageNotFound() {
         sx={{
           fontSize: "3rem",
           fontWeight: 500,
-          fontFamily: "Bebas Neue, sans-serif",
-        }}>
+          fontFamily: "Rubik, sans-serif",
+        }}
+      >
         404 | Page Not Found
       </Text>
       <Button
@@ -36,11 +38,12 @@ function PageNotFound() {
         leftIcon={<Home />}
         onClick={() => navigate("/")}
         sx={{
-          fontFamily: "Bebas Neue, sans-serif",
+          fontFamily: "Rubik, sans-serif",
           letterSpacing: "5px",
           fontSize: "1rem",
           fontWeight: 400,
-        }}>
+        }}
+      >
         Return Home
       </Button>
     </Box>

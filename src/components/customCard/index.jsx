@@ -3,7 +3,7 @@ import { Box, Text, Image } from "@chakra-ui/react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import posterNotFound from "assets/8030430_3828535.svg";
+import posterNotFound from "assets/551334.jpg";
 
 function CustomCard({ item, mediaType }) {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ function CustomCard({ item, mediaType }) {
         <Text
           sx={{
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             letterSpacing: "2px",
             fontSize: "1.5rem",
             fontWeight: 700,
@@ -78,7 +78,7 @@ function CustomCard({ item, mediaType }) {
         <Text
           sx={{
             color: "gray",
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             letterSpacing: "2px",
             fontSize: "1.2rem",
             fontWeight: 500,

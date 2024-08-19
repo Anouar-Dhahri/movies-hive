@@ -28,7 +28,7 @@ function Footer() {
           variant="ghost"
           sx={{
             fontWeight: 400,
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             fontSize: "1rem",
             letterSpacing: "2px",
             color: "#303740",
@@ -41,7 +41,7 @@ function Footer() {
           variant="ghost"
           sx={{
             fontWeight: 400,
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             fontSize: "1rem",
             letterSpacing: "2px",
             color: "#303740",
@@ -54,7 +54,7 @@ function Footer() {
           variant="ghost"
           sx={{
             fontWeight: 400,
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             fontSize: "1rem",
             letterSpacing: "2px",
             color: "#303740",
@@ -67,7 +67,7 @@ function Footer() {
           variant="ghost"
           sx={{
             fontWeight: 400,
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             fontSize: "1rem",
             letterSpacing: "2px",
             color: "#303740",
@@ -80,7 +80,7 @@ function Footer() {
           variant="ghost"
           sx={{
             fontWeight: 400,
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             fontSize: "1rem",
             letterSpacing: "2px",
             color: "#303740",
@@ -97,7 +97,7 @@ function Footer() {
           margin: "auto",
           justifyContent: "center",
           fontWeight: 200,
-          fontFamily: "Bebas Neue, sans-serif",
+          fontFamily: "Rubik, sans-serif",
           fontSize: "1rem",
           wordSpacing: "5px",
           textAlign: "center",

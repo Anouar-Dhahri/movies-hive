@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CastSwiper, CustomSwiper, VideoSwipper } from "components";
+import {
+  DetailsBanner,
+  CastSwiper,
+  CustomSwiper,
+  VideoSwipper,
+} from "components";
 import {
   similarData,
   recommendationsData,
   videosData,
   creditsData,
+  detailsData,
 } from "apis/data";
 
 function MediaDetails() {
@@ -17,6 +23,7 @@ function MediaDetails() {
   const { mediaType, mediaId } = useParams();
   useEffect(() => {
     if (mediaType && mediaId) {
+      dispatch(detailsData({ mediaType: mediaType, mediaId: mediaId }));
       dispatch(creditsData({ mediaType: mediaType, mediaId: mediaId }));
       dispatch(videosData({ mediaType: mediaType, mediaId: mediaId }));
       dispatch(similarData({ mediaType: mediaType, mediaId: mediaId }));
@@ -34,6 +41,13 @@ function MediaDetails() {
         flexDirection: "column",
       }}
     >
+      <DetailsBanner
+        data={dataReducer?.details}
+        video={dataReducer?.videos?.[0]}
+        crew={dataReducer?.credits?.crew}
+        url={dataReducer?.url?.backdrop}
+      />
+
       <CastSwiper
         title={"Top Cast"}
         data={dataReducer?.credits}
@@ -41,7 +55,7 @@ function MediaDetails() {
       />
 
       <VideoSwipper title={"Official Videos"} data={dataReducer?.videos} />
-      
+
       <CustomSwiper
         title={`Similar ${mediaType === "movie" ? "Movies" : "TV Shows"}`}
         data={dataReducer?.similar}

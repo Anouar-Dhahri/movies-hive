@@ -67,7 +67,7 @@ function SearchResult() {
         <Text
           sx={{
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             letterSpacing: "2px",
             fontSize: "1.5rem",
             fontWeight: 700,
@@ -115,7 +115,7 @@ function SearchResult() {
           <Text
             sx={{
               color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
-              fontFamily: "Bebas Neue, sans-serif",
+              fontFamily: "Rubik, sans-serif",
               letterSpacing: "2px",
               fontSize: "3rem",
               fontWeight: "bold",
