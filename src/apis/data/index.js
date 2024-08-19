@@ -158,3 +158,20 @@ export const creditsData = createAsyncThunk(
     }
   }
 );
+
+export const detailsData = createAsyncThunk(
+  "data/details",
+  async ({ mediaType, mediaId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_TMDB_BASE_URL}/${mediaType}/${mediaId}`,
+        {
+          headers: apiHeaders,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

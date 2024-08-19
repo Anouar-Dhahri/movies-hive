@@ -2,8 +2,14 @@ import React from "react";
 import {
   Box,
   Button,
+  IconButton,
   Text,
   Image,
+  Show,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   CircularProgress,
   CircularProgressLabel,
   Skeleton,
@@ -17,8 +23,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import moment from "moment";
-import posterNotFound from "assets/8030430_3828535.svg";
+import posterNotFound from "assets/551334.jpg";
 import { useNavigate } from "react-router-dom";
+import DotsVerticalIcon from "mdi-material-ui/DotsVertical";
 
 function CustomSwiper({
   title,
@@ -31,32 +38,6 @@ function CustomSwiper({
   const themeReducer = useSelector((state) => state.theme);
   const dataReducer = useSelector((state) => state.data);
   const navigate = useNavigate();
-  // const handleGenresNames = (genre_ids) => {
-  //   const data = genre_ids?.slice(0, 2);
-  //   return data.map((gId) => {
-  //     const foundId = dataReducer.genres?.find((item) => item.id === gId);
-  //     if (foundId) {
-  //       return (
-  //         <Text
-  //           key={gId}
-  //           sx={{
-  //             backgroundColor: "#FFE53B",
-  //             paddingLeft: 1,
-  //             paddingRight: 1,
-  //             borderRadius: "5px",
-  //             fontFamily: "Bebas Neue, sans-serif",
-  //             letterSpacing: "1px",
-  //             height: "1rem",
-  //           }}
-  //         >
-  //           {foundId?.name}
-  //         </Text>
-  //       );
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // };
 
   return (
     <Box
@@ -65,7 +46,8 @@ function CustomSwiper({
         flexDirection: "column",
         gap: 6,
         width: "80%",
-        height: "550px",
+        height: "500px",
+        maxHeight: "550px",
         margin: "auto",
       }}
     >
@@ -73,15 +55,21 @@ function CustomSwiper({
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          height: "2rem",
+          mb: "1rem",
         }}
       >
-        <Box sx={{ display: "flex", height: "40px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            height: "2rem",
+          }}
+        >
           <Text
-            fontSize={["25x", "25px", "30px", "40px", "40px"]}
+            fontSize="2rem"
             sx={{
               fontWeight: 500,
-              marginBottom: "40px",
-              fontFamily: "Bebas Neue, sans-serif",
+              fontFamily: "Rubik, sans-serif",
               color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
             }}
           >
@@ -89,108 +77,159 @@ function CustomSwiper({
           </Text>
           <FireIcon sx={{ width: "40px", height: "40px", mt: "5px" }} />
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
-          {swiperActions?.map((action, index) => {
-            if (index === 0) {
-              return (
-                <Button
-                  key={index}
-                  name={action?.name}
-                  value={action?.value}
-                  onClick={handleActionsValues}
-                  sx={{
-                    width: "150px",
-                    height: "40px",
-                    backgroundColor:
-                      actionValues[action?.name] === action?.value
-                        ? "#000"
-                        : "#FFE53B",
-                    color:
-                      actionValues[action?.name] === action?.value
-                        ? "#FFE53B"
-                        : "#000",
-                    fontWeight: "bold",
-                    fontFamily: "Bebas Neue, sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "2px",
-                    borderLeftRadius: "45px",
-                    borderRightRadius: "0px",
-                  }}
-                  _hover={{
-                    backgroundColor: "#000",
-                    color: "#FFE53B",
-                  }}
-                >
-                  {action?.title}
-                </Button>
-              );
-            } else if (index + 1 === swiperActions?.length) {
-              return (
-                <Button
-                  key={index}
-                  name={action?.name}
-                  value={action?.value}
-                  onClick={handleActionsValues}
-                  sx={{
-                    width: "150px",
-                    height: "40px",
-                    backgroundColor:
-                      actionValues[action?.name] === action?.value
-                        ? "#000"
-                        : "#FFE53B",
-                    color:
-                      actionValues[action?.name] === action?.value
-                        ? "#FFE53B"
-                        : "#000",
-                    fontWeight: "bold",
-                    fontFamily: "Bebas Neue, sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "2px",
-                    borderRightRadius: "45px",
-                    borderLeftRadius: "0px",
-                  }}
-                  _hover={{
-                    backgroundColor: "#000",
-                    color: "#FFE53B",
-                  }}
-                >
-                  {action?.title}
-                </Button>
-              );
-            } else {
-              return (
-                <Button
-                  key={index}
-                  name={action?.name}
-                  value={action?.value}
-                  onClick={handleActionsValues}
-                  sx={{
-                    width: "150px",
-                    height: "40px",
-                    backgroundColor:
-                      actionValues[action?.name] === action?.value
-                        ? "#000"
-                        : "#FFE53B",
-                    color:
-                      actionValues[action?.name] === action?.value
-                        ? "#FFE53B"
-                        : "#000",
-                    fontWeight: "bold",
-                    fontFamily: "Bebas Neue, sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "2px",
-                    borderRadius: "0px",
-                  }}
-                  _hover={{
-                    backgroundColor: "#000",
-                    color: "#FFE53B",
-                  }}
-                >
-                  {action?.title}
-                </Button>
-              );
-            }
-          })}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            mt: "0.7rem",
+            zIndex: 1000,
+          }}
+        >
+          <Show above={"md"}>
+            {swiperActions?.map((action, index) => {
+              if (index === 0) {
+                return (
+                  <Button
+                    key={index}
+                    name={action?.name}
+                    value={action?.value}
+                    onClick={handleActionsValues}
+                    sx={{
+                      minWidth: "100px",
+                      height: "2rem",
+                      backgroundColor:
+                        actionValues[action?.name] === action?.value
+                          ? "#000"
+                          : "#FFE53B",
+                      color:
+                        actionValues[action?.name] === action?.value
+                          ? "#FFE53B"
+                          : "#000",
+                      fontWeight: "bold",
+                      fontFamily: "Rubik, sans-serif",
+                      fontSize: "0.7rem",
+                      letterSpacing: "2px",
+                      borderLeftRadius: "45px",
+                      borderRightRadius: "0px",
+                      textTransform: "capitalize",
+                    }}
+                    _hover={{
+                      backgroundColor: "#000",
+                      color: "#FFE53B",
+                    }}
+                  >
+                    {action?.title}
+                  </Button>
+                );
+              } else if (index + 1 === swiperActions?.length) {
+                return (
+                  <Button
+                    key={index}
+                    name={action?.name}
+                    value={action?.value}
+                    onClick={handleActionsValues}
+                    sx={{
+                      minWidth: "100px",
+                      height: "2rem",
+                      backgroundColor:
+                        actionValues[action?.name] === action?.value
+                          ? "#000"
+                          : "#FFE53B",
+                      color:
+                        actionValues[action?.name] === action?.value
+                          ? "#FFE53B"
+                          : "#000",
+                      fontWeight: "bold",
+                      fontFamily: "Rubik, sans-serif",
+                      fontSize: "0.7rem",
+                      letterSpacing: "2px",
+                      borderRightRadius: "45px",
+                      borderLeftRadius: "0px",
+                    }}
+                    _hover={{
+                      backgroundColor: "#000",
+                      color: "#FFE53B",
+                    }}
+                  >
+                    {action?.title}
+                  </Button>
+                );
+              } else {
+                return (
+                  <Button
+                    key={index}
+                    name={action?.name}
+                    value={action?.value}
+                    onClick={handleActionsValues}
+                    sx={{
+                      minWidth: "100px",
+                      height: "2rem",
+                      backgroundColor:
+                        actionValues[action?.name] === action?.value
+                          ? "#000"
+                          : "#FFE53B",
+                      color:
+                        actionValues[action?.name] === action?.value
+                          ? "#FFE53B"
+                          : "#000",
+                      fontWeight: "bold",
+                      fontFamily: "Rubik, sans-serif",
+                      fontSize: "0.7rem",
+                      letterSpacing: "2px",
+                      borderRadius: "0px",
+                    }}
+                    _hover={{
+                      backgroundColor: "#000",
+                      color: "#FFE53B",
+                    }}
+                  >
+                    {action?.title}
+                  </Button>
+                );
+              }
+            })}
+          </Show>
+
+          <Show below={"md"}>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={<DotsVerticalIcon />}
+                _hover={{ backgroundColor: "#000", color: "#FFE53B" }}
+                _active={{ backgroundColor: "#000", color: "#FFE53B" }}
+                sx={{
+                  backgroundColor: "#FFE53B",
+                  color: "#000",
+                }}
+              />
+              <MenuList>
+                {swiperActions?.map((action, index) => (
+                  <MenuItem
+                    key={index}
+                    name={action?.name}
+                    value={action?.value}
+                    onClick={handleActionsValues}
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: 400,
+                      fontFamily: "Bebas Neue, sans-serif",
+                      letterSpacing: "2px",
+                      backgroundColor:
+                        actionValues[action?.name] === action?.value
+                          ? "#000"
+                          : "transparent",
+                      color:
+                        actionValues[action?.name] === action?.value
+                          ? "#FFE53B"
+                          : "#000",
+                    }}
+                  >
+                    {action?.title}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+          </Show>
         </Box>
       </Box>
       <Box>
@@ -311,9 +350,9 @@ function CustomSwiper({
                       sx={{
                         color:
                           themeReducer?.theme === "light" ? "#000" : "#FFE53B",
-                        fontFamily: "Bebas Neue, sans-serif",
+                        fontFamily: "Rubik, sans-serif",
                         letterSpacing: "2px",
-                        fontSize: "1.5rem",
+                        fontSize: "1.2rem",
                         fontWeight: 700,
                       }}
                     >
@@ -322,9 +361,9 @@ function CustomSwiper({
                     <Text
                       sx={{
                         color: "gray",
-                        fontFamily: "Bebas Neue, sans-serif",
+                        fontFamily: "Rubik, sans-serif",
                         letterSpacing: "2px",
-                        fontSize: "1.2rem",
+                        fontSize: "1rem",
                         fontWeight: 500,
                       }}
                     >
@@ -375,13 +414,13 @@ function CustomSwiper({
                     <Skeleton
                       sx={{
                         width: "100%",
-                        height: "1.5rem",
+                        height: "1.2rem",
                       }}
                     />
                     <Skeleton
                       sx={{
                         width: "80%",
-                        height: "1.2rem",
+                        height: "1rem",
                       }}
                     />
                   </Box>

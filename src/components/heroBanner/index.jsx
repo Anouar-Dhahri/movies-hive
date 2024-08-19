@@ -3,8 +3,7 @@ import { Box, Image, Spinner, Text, Input, Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { upcomingMovies } from "../../apis/movies";
 import { useNavigate } from "react-router-dom";
-// import LoadingBar from "react-top-loading-bar";
-// import useProgress from "hooks/useProgress";
+import MagnifyIcon from "mdi-material-ui/Magnify";
 
 function HeroBanner() {
   /**redux */
@@ -98,21 +97,22 @@ function HeroBanner() {
             }}
           >
             <Text
-              fontSize={["60x", "60px", "60px", "70px", "70px"]}
+              fontSize={["3rem", "3rem", "4rem", "5rem", "5rem"]}
               sx={{
                 fontWeight: 700,
                 marginBottom: "10px",
-                fontFamily: "Bebas Neue, sans-serif",
+                fontFamily: "Rubik, sans-serif",
+                textTransform: "capitalize",
               }}
             >
               Welcome.
             </Text>
             <Text
-              fontSize={["25x", "25px", "30px", "40px", "40px"]}
+              fontSize={["1.5rem", "1.5rem", "2rem", "2rem", "2rem"]}
               sx={{
                 fontWeight: 500,
                 marginBottom: "40px",
-                fontFamily: "Bebas Neue, sans-serif",
+                fontFamily: "Rubik, sans-serif",
               }}
             >
               Millions of movies, TV shows and people to discover. Explore now.
@@ -121,7 +121,8 @@ function HeroBanner() {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                width: "100%",
+                width: "90%",
+                margin: "auto",
               }}
             >
               <Input
@@ -137,12 +138,12 @@ function HeroBanner() {
                     "calc(100% - 150px)",
                     "calc(100% - 150px)",
                   ],
-                  height: "60px",
+                  height: "50px",
                   backgroundColor: "#FFF",
                   border: "none",
                   borderRadius: "30px 0 0 30px",
                   padding: "0 15px",
-                  fontSize: "20px",
+                  fontSize: "1rem",
                   color: "#000",
                   fontFamily: "Bebas Neue, sans-serif",
                   letterSpacing: "2px",
@@ -151,8 +152,8 @@ function HeroBanner() {
               />
               <Button
                 sx={{
-                  width: "100px",
-                  height: "60px",
+                  minWidth: "100px",
+                  height: "50px",
                   backgroundColor: "#222",
                   color: "#FFF",
                   outline: 0,
@@ -163,8 +164,9 @@ function HeroBanner() {
                   cursor: "pointer",
                   letterSpacing: "2px",
                   fontFamily: "Bebas Neue, sans-serif",
-                  padding: "0 1rem 0 1rem",
+                  padding: "0 2rem 0 2rem",
                 }}
+                leftIcon={<MagnifyIcon />}
                 _hover={{ color: "#FFE53B" }}
                 _active={{ background: "transparent" }}
                 onClick={searchQueryHandler}

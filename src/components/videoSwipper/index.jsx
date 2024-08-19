@@ -42,7 +42,7 @@ function VideoSwiper({ title, data }) {
           sx={{
             fontWeight: 500,
             marginBottom: "40px",
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
           }}
         >
@@ -71,6 +71,7 @@ function VideoSwiper({ title, data }) {
                 flexDirection: "column",
                 gap: 4,
                 minWidth: "300px",
+                width: "300px",
                 height: "300px",
                 borderRadius: "10px",
                 alignItems: "center",
@@ -92,7 +93,7 @@ function VideoSwiper({ title, data }) {
               <Text
                 sx={{
                   color: "gray",
-                  fontFamily: "Bebas Neue, sans-serif",
+                  fontFamily: "Rubik, sans-serif",
                   letterSpacing: "2px",
                   fontSize: "1.2rem",
                   fontWeight: 500,

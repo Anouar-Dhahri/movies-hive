@@ -22,7 +22,7 @@ function CastSwiper({ title, data, url }) {
           sx={{
             fontWeight: 500,
             marginBottom: "40px",
-            fontFamily: "Bebas Neue, sans-serif",
+            fontFamily: "Rubik, sans-serif",
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
           }}
         >
@@ -69,7 +69,7 @@ function CastSwiper({ title, data, url }) {
               <Text
                 sx={{
                   color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
-                  fontFamily: "Bebas Neue, sans-serif",
+                  fontFamily: "Rubik, sans-serif",
                   letterSpacing: "2px",
                   fontSize: "1.5rem",
                   fontWeight: 700,
@@ -80,7 +80,7 @@ function CastSwiper({ title, data, url }) {
               <Text
                 sx={{
                   color: "gray",
-                  fontFamily: "Bebas Neue, sans-serif",
+                  fontFamily: "Rubik, sans-serif",
                   letterSpacing: "2px",
                   fontSize: "1.2rem",
                   fontWeight: 500,

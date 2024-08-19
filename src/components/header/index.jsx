@@ -213,6 +213,7 @@ function Header() {
                   sx={{
                     fontWeight: 400,
                     fontFamily: "Bebas Neue, sans-serif",
+                    letterSpacing: "2px",
                   }}
                   onClick={() => navigate(`/explore/${"movie"}`)}
                 >
@@ -222,6 +223,7 @@ function Header() {
                   sx={{
                     fontWeight: 400,
                     fontFamily: "Bebas Neue, sans-serif",
+                    letterSpacing: "2px",
                   }}
                   onClick={() => navigate(`/explore/${"tv"}`)}
                 >
