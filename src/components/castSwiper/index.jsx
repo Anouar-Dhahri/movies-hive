@@ -13,15 +13,20 @@ function CastSwiper({ title, data, url }) {
         width: "80%",
         gap: 6,
         margin: "auto",
-        height: "400px",
+        minHeight: "400px",
+        height: "auto",
       }}
     >
-      <Box sx={{ display: "flex", height: "40px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          height: "2rem",
+        }}
+      >
         <Text
-          fontSize={["25x", "25px", "30px", "40px", "40px"]}
+          fontSize="2rem"
           sx={{
             fontWeight: 500,
-            marginBottom: "40px",
             fontFamily: "Rubik, sans-serif",
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
           }}
@@ -52,7 +57,7 @@ function CastSwiper({ title, data, url }) {
                 flexDirection: "column",
                 gap: 4,
                 minWidth: "250px",
-                height: "300px",
+                minHeight: "300px",
                 borderRadius: "10px",
                 alignItems: "center",
               }}
@@ -73,6 +78,7 @@ function CastSwiper({ title, data, url }) {
                   letterSpacing: "2px",
                   fontSize: "1.5rem",
                   fontWeight: 700,
+                  textAlign: "center",
                 }}
               >
                 {obj?.name}
@@ -85,6 +91,7 @@ function CastSwiper({ title, data, url }) {
                   fontSize: "1.2rem",
                   fontWeight: 500,
                   textWrap: "wrap",
+                  textAlign: "center",
                 }}
               >
                 {obj?.character}

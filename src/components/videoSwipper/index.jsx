@@ -36,12 +36,16 @@ function VideoSwiper({ title, data }) {
         minHeight: "400px",
       }}
     >
-      <Box sx={{ display: "flex", height: "40px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          height: "2rem",
+        }}
+      >
         <Text
-          fontSize={["25x", "25px", "30px", "40px", "40px"]}
+          fontSize="2rem"
           sx={{
             fontWeight: 500,
-            marginBottom: "40px",
             fontFamily: "Rubik, sans-serif",
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
           }}
