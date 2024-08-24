@@ -76,14 +76,26 @@ export const fetchData = createAsyncThunk(
 
 export const discoverData = createAsyncThunk(
   "data/discover",
-  async ({ mediaType, page }, { rejectWithValue }) => {
+  async (options, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_TMDB_BASE_URL}/discover/${mediaType}?page=&page=${page}`,
-        {
-          headers: apiHeaders,
-        }
-      );
+      const BASE_URL = `${process.env.REACT_APP_TMDB_BASE_URL}/discover/${options?.mediaType}?page=&page=${options?.page}`;
+      let API_URL;
+      if (options?.genre) {
+        API_URL = `${BASE_URL}&with_genres=${options?.genre}`;
+      }
+      if (options?.sortby) {
+        API_URL = `${BASE_URL}&sort_by=${options?.sortby}`;
+      }
+      if (options?.genre && options?.sortby) {
+        API_URL = `${BASE_URL}&with_genres=${options?.genre}&sort_by=${options?.sortby}`;
+      }
+      if (!options?.genre && !options?.sortby) {
+        API_URL = BASE_URL;
+      }
+
+      const response = await axios.get(API_URL, {
+        headers: apiHeaders,
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

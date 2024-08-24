@@ -4,9 +4,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import { discoverData } from "apis/data";
-import { CustomCard } from "components";
+import { CustomCard, CustomSelect } from "components";
 import MovieSearchIcon from "mdi-material-ui/MovieSearch";
-import CustomSelect from "components/customSelect";
 
 let page = 1;
 const sortbyData = [
@@ -21,7 +20,6 @@ const sortbyData = [
   { value: "primary_release_date.asc", label: "Release Date Ascending" },
   { value: "original_title.asc", label: "Title (A-Z)" },
 ];
-let filters = {};
 
 function Explore() {
   const dispatch = useDispatch();
@@ -35,8 +33,14 @@ function Explore() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [storedMediaType, setStoredMediaType] = useState("");
-  const [genre, setGenre] = useState(null);
-  const [sortby, setSortby] = useState(null);
+  const [genre, setGenre] = useState({
+    value: null,
+    prevValue: null,
+  });
+  const [sortby, setSortby] = useState({
+    value: null,
+    prevValue: null,
+  });
 
   useEffect(() => {
     if (mediaType.length > 0 && mediaType !== storedMediaType) {
@@ -45,19 +49,42 @@ function Explore() {
     }
   }, [mediaType, storedMediaType]);
 
+  const handleSelectedValue = (event) => {
+    const { name, value } = event.target;
+    if (name === "genre") {
+      setGenre((prevValue) => ({
+        ...prevValue,
+        prevValue: prevValue.value,
+        value: value,
+      }));
+    } else if (name === "sortby") {
+      setSortby((prevValue) => ({
+        ...prevValue,
+        prevValue: prevValue.value,
+        value: value,
+      }));
+    }
+    page = 1;
+  };
+
   useEffect(() => {
-    if (inView) {
+    if (inView || genre || sortby) {
       setIsLoading(true);
       // Add a delay of 500 milliseconds
       const delay = 500;
 
       const timeoutId = setTimeout(() => {
-        dispatch(discoverData({ mediaType: mediaType, page: page })).then(
-          (res) => {
-            setData([...data, ...res.payload.results]);
-            page++;
-          }
-        );
+        dispatch(
+          discoverData({
+            mediaType: mediaType,
+            page: page,
+            genre: genre.value,
+            sortby: sortby.value,
+          })
+        ).then((res) => {
+          setData([...data, ...res.payload.results]);
+          page++;
+        });
 
         setIsLoading(false);
       }, delay);
@@ -68,34 +95,7 @@ function Explore() {
     // eslint-disable-next-line
   }, [inView, data, isLoading]);
 
-  useEffect(() => {
-    filters = {};
-    setSortby(null);
-    setGenre(null);
-  }, [mediaType]);
-
-  const onChange = (selectedItems, action) => {
-    if (action.name === "sortby") {
-      setSortby(selectedItems);
-      if (action.action !== "clear") {
-        filters.sort_by = selectedItems.value;
-      } else {
-        delete filters.sort_by;
-      }
-    }
-
-    if (action.name === "genres") {
-      setGenre(selectedItems);
-      if (action.action !== "clear") {
-        let genreId = selectedItems.map((g) => g.id);
-        genreId = JSON.stringify(genreId).slice(1, -1);
-        filters.with_genres = genreId;
-      } else {
-        delete filters.with_genres;
-      }
-    }
-  };
-
+  console.log({ genre, sortby });
   return (
     <Box
       sx={{
@@ -110,7 +110,7 @@ function Explore() {
         sx={{
           p: 2,
           display: "flex",
-          flexDirection: "row",
+          flexDirection: ["column", "column", "column", "row", "row"],
           justifyContent: "space-between",
           mb: 3,
         }}
@@ -129,10 +129,26 @@ function Explore() {
         <Box
           sx={{
             display: "flex",
+            flexDirection: ["column", "column", "row", "row", "row"],
             gap: 2,
           }}
         >
-          <CustomSelect data={[{ name: "test" }, { name: "test2" }]} />
+          <CustomSelect
+            name="genre"
+            handleSelectedValue={handleSelectedValue}
+            data={
+              dataReducer?.genres && dataReducer?.genres?.length > 0
+                ? dataReducer?.genres
+                : []
+            }
+            placeholder="Select Genre"
+          />
+          <CustomSelect
+            name="sortby"
+            handleSelectedValue={handleSelectedValue}
+            data={sortbyData && sortbyData.length > 0 ? sortbyData : []}
+            placeholder="Sort By"
+          />
         </Box>
       </Box>
       <Box

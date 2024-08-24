@@ -10,3 +10,4 @@ export { default as VideoPlayer } from "./videoPlayer";
 
 export { default as DetailsBanner } from "./detailsBanner";
 export { default as CustomTabs } from "./customCard";
+export { default as CustomSelect } from "./customSelect";

@@ -68,7 +68,7 @@ const controlNavbar = () => {
   return (
     <Box
       sx={{
-        display: scrollingUp ? "block" : "none",
+        display: scrollingUp || lastScrollY === 0 ? "block" : "none",
         width: "100%",
         height: "70px",
         position: "fixed",

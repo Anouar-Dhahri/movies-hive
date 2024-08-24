@@ -1,18 +1,25 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
-import "./style.css";
+import { Box, Select } from "@chakra-ui/react";
+// import "./style.css";
 
-function CustomSelect({ data }) {
+function CustomSelect({ name, handleSelectedValue, data, placeholder }) {
   return (
-    <Box className="custom-select">
-      <select multiple>
-        {data?.map((item, index) => (
-          <option key={index} value={item?.value}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-    </Box>
+    <Select
+      name={name}
+      placeholder={placeholder}
+      onChange={handleSelectedValue}
+      size="md"
+    >
+      {data?.map((item, index) => (
+        <option
+          key={index}
+          value={item?.value || item?.id}
+          className="custom-select-option"
+        >
+          {item.name || item.label}
+        </option>
+      ))}
+    </Select>
   );
 }
 
