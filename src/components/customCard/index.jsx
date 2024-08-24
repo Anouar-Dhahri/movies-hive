@@ -69,7 +69,7 @@ function CustomCard({ item, mediaType }) {
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
             fontFamily: "Rubik, sans-serif",
             letterSpacing: "2px",
-            fontSize: "1.5rem",
+            fontSize: "1.2rem",
             fontWeight: 700,
           }}
         >
@@ -80,7 +80,7 @@ function CustomCard({ item, mediaType }) {
             color: "gray",
             fontFamily: "Rubik, sans-serif",
             letterSpacing: "2px",
-            fontSize: "1.2rem",
+            fontSize: "1rem",
             fontWeight: 500,
           }}
         >

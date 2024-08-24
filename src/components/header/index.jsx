@@ -32,13 +32,25 @@ function Header() {
 
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollingUp, setScrollingUp] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const controlNavbar = () => {
-    setLastScrollY(window.scrollY);
-  };
+const controlNavbar = () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY < lastScrollY) {
+    // Scrolling up
+    setScrollingUp(true);
+  } else {
+    // Scrolling down
+    setScrollingUp(false);
+  }
+
+  setLastScrollY(currentScrollY);
+};
 
   useEffect(() => {
     if (lastScrollY > 200 && showSearchBar) {
@@ -56,7 +68,7 @@ function Header() {
   return (
     <Box
       sx={{
-        display: lastScrollY > 200 ? "none" : "block",
+        display: scrollingUp ? "block" : "none",
         width: "100%",
         height: "70px",
         position: "fixed",

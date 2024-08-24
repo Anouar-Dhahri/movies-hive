@@ -37,7 +37,7 @@ function MediaDetails() {
       sx={{
         display: "flex",
         margin: "auto",
-        mt: "150px",
+
         flexDirection: "column",
       }}
     >

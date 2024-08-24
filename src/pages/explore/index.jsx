@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { discoverData } from "apis/data";
 import { CustomCard } from "components";
 import MovieSearchIcon from "mdi-material-ui/MovieSearch";
-import Select from "react-select";
+import CustomSelect from "components/customSelect";
 
 let page = 1;
 const sortbyData = [
@@ -112,6 +112,7 @@ function Explore() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          mb: 3,
         }}
       >
         <Text
@@ -119,7 +120,7 @@ function Explore() {
             color: themeReducer?.theme === "light" ? "#000" : "#FFE53B",
             fontFamily: "Rubik, sans-serif",
             letterSpacing: "2px",
-            fontSize: "1.5rem",
+            fontSize: "2rem",
             fontWeight: 700,
           }}
         >
@@ -131,29 +132,7 @@ function Explore() {
             gap: 2,
           }}
         >
-          <Select
-            isMulti
-            name="genres"
-            value={genre}
-            closeMenuOnSelect={false}
-            options={dataReducer.genres}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id}
-            onChange={onChange}
-            placeholder="Select genres"
-          />
-
-          <Select
-            name="sortby"
-            value={sortby}
-            options={sortbyData}
-            onChange={onChange}
-            isClearable={true}
-            placeholder="Sort by"
-            style={{
-              width: "200px",
-            }}
-          />
+          <CustomSelect data={[{ name: "test" }, { name: "test2" }]} />
         </Box>
       </Box>
       <Box
