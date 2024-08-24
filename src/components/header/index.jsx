@@ -38,19 +38,19 @@ function Header() {
     window.scrollTo(0, 0);
   }, [location]);
 
-const controlNavbar = () => {
-  const currentScrollY = window.scrollY;
+  const controlNavbar = () => {
+    const currentScrollY = window.scrollY;
 
-  if (currentScrollY < lastScrollY) {
-    // Scrolling up
-    setScrollingUp(true);
-  } else {
-    // Scrolling down
-    setScrollingUp(false);
-  }
+    if (currentScrollY < lastScrollY) {
+      // Scrolling up
+      setScrollingUp(true);
+    } else {
+      // Scrolling down
+      setScrollingUp(false);
+    }
 
-  setLastScrollY(currentScrollY);
-};
+    setLastScrollY(currentScrollY);
+  };
 
   useEffect(() => {
     if (lastScrollY > 200 && showSearchBar) {
@@ -98,6 +98,8 @@ const controlNavbar = () => {
             lineHeight: "70px",
             width: "auto",
           }}
+          _hover={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
         >
           <HexagonMultiple
             sx={{
@@ -118,8 +120,6 @@ const controlNavbar = () => {
                 "linear-gradient(147deg, #FFE53B 0%, #FF2525 74%",
               backgroundClip: "text",
             }}
-            _hover={{ cursor: "pointer" }}
-            onClick={() => navigate("/")}
           >
             MoviesHive
           </Text>
