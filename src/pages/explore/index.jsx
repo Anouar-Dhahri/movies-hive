@@ -68,7 +68,7 @@ function Explore() {
   };
 
   useEffect(() => {
-    if (inView || genre || sortby) {
+    if (inView) {
       setIsLoading(true);
       // Add a delay of 500 milliseconds
       const delay = 500;
@@ -92,8 +92,26 @@ function Explore() {
       // Clear the timeout if the component is unmounted or inView becomes false
       return () => clearTimeout(timeoutId);
     }
-    // eslint-disable-next-line
   }, [inView, data, isLoading]);
+
+  useEffect(() => {
+    page = 1;
+    if (mediaType && (genre.value || sortby.value)) {
+      setIsLoading(true);
+      dispatch(
+        discoverData({
+          mediaType: mediaType,
+          page: page,
+          genre: genre.value,
+          sortby: sortby.value,
+        })
+      ).then((res) => {
+        setData(res.payload.results);
+        setIsLoading(false);
+        page++;
+      });
+    }
+  }, [genre.value, sortby.value, mediaType]);
 
   console.log({ genre, sortby });
   return (

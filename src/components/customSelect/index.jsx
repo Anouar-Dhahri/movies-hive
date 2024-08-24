@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Select } from "@chakra-ui/react";
-// import "./style.css";
+import { Select } from "@chakra-ui/react";
 
 function CustomSelect({ name, handleSelectedValue, data, placeholder }) {
   return (
@@ -9,13 +8,13 @@ function CustomSelect({ name, handleSelectedValue, data, placeholder }) {
       placeholder={placeholder}
       onChange={handleSelectedValue}
       size="md"
+      sx={{
+        backgroundColor: "#fff",
+        color: "#000",
+      }}
     >
       {data?.map((item, index) => (
-        <option
-          key={index}
-          value={item?.value || item?.id}
-          className="custom-select-option"
-        >
+        <option key={index} value={item?.value || item?.id}>
           {item.name || item.label}
         </option>
       ))}
