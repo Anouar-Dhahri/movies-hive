@@ -1,148 +1,95 @@
 import React from "react";
-import { Box, IconButton, Button } from "@chakra-ui/react";
-import { Facebook, Instagram, Linkedin, AlphaX } from "mdi-material-ui";
+import { Box, Divider, Button, Text } from "@chakra-ui/react";
+import { HexagonMultiple } from "mdi-material-ui";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import moment from "moment";
+
+const btnStyle = {
+  fontWeight: 400,
+  fontFamily: "Rubik, sans-serif",
+  fontSize: "1rem",
+  letterSpacing: "2px",
+  color: "gray",
+};
 
 function Footer() {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "80%",
+        margin: "auto",
         height: "auto",
         display: "flex",
         flexDirection: "column",
         bottom: 0,
-        gap: "1rem",
-        p: "1rem",
-        zIndex: 9999,
+        flex: 1,
+        gap: "2rem",
+        p: "2rem",
       }}
     >
+      <Divider />
+
       <Box
         sx={{
           display: "flex",
-          gap: "2rem",
+          gap: 6,
           justifyContent: "center",
-          flexDirection: "row",
+          flexDirection: ["column", "column", "column", "row", "row"],
         }}
       >
-        <Button
-          variant="ghost"
-          sx={{
-            fontWeight: 400,
-            fontFamily: "Rubik, sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "2px",
-            color: "#303740",
-            mt: "15px",
-          }}
-        >
+        <Button variant="link" sx={btnStyle}>
           Terms Of Use
         </Button>
-        <Button
-          variant="ghost"
-          sx={{
-            fontWeight: 400,
-            fontFamily: "Rubik, sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "2px",
-            color: "#303740",
-            mt: "15px",
-          }}
-        >
+        <Button variant="link" sx={btnStyle}>
           Privacy-Policy
         </Button>
-        <Button
-          variant="ghost"
-          sx={{
-            fontWeight: 400,
-            fontFamily: "Rubik, sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "2px",
-            color: "#303740",
-            mt: "15px",
-          }}
-        >
+        <Button variant="link" sx={btnStyle}>
           About
         </Button>
-        <Button
-          variant="ghost"
-          sx={{
-            fontWeight: 400,
-            fontFamily: "Rubik, sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "2px",
-            color: "#303740",
-            mt: "15px",
-          }}
-        >
+        <Button variant="link" sx={btnStyle}>
           Blog
         </Button>
-        <Button
-          variant="ghost"
-          sx={{
-            fontWeight: 400,
-            fontFamily: "Rubik, sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "2px",
-            color: "#303740",
-            mt: "15px",
-          }}
-        >
+        <Button variant="link" sx={btnStyle}>
           FAQ
         </Button>
       </Box>
+
       <Box
         sx={{
           display: "flex",
-          width: "60%",
-          margin: "auto",
-          justifyContent: "center",
-          fontWeight: 200,
+          flexDirection: "column",
+          lineHeight: "70px",
+          width: "auto",
+          alignItems: "center",
+        }}
+        _hover={{ cursor: "pointer" }}
+        onClick={() => navigate("/")}
+      >
+        <HexagonMultiple
+          sx={{
+            width: "50px",
+            height: "50px",
+            mt: "10px",
+            color: "#FFE53B",
+          }}
+        />
+      </Box>
+      <Text
+        sx={{
+          color: "gray",
           fontFamily: "Rubik, sans-serif",
+          letterSpacing: "2px",
           fontSize: "1rem",
-          wordSpacing: "5px",
+          fontWeight: 500,
+          textWrap: "wrap",
           textAlign: "center",
         }}
       >
-        Fusce ut tortor vehicula, eleifend dui sed, bibendum libero. Etiam eu
-        arcu in augue tempus congue. Cras id purus quam. Maecenas aliquet nulla
-        nec diam tempus commodo. Cras dignissim tellus orci, non congue massa
-        volutpat in. Proin dictum malesuada consequat. Mauris purus turpis,
-        pulvinar eu convallis sagittis, viverra quis nibh. Vivamus a purus nec
-        quam blandit molestie in vitae nibh. Maecenas fermentum viverra laoreet.
-        Aliquam nunc neque, tristique at ex vel, varius volutpat libero. Aliquam
-        erat volutpat. Morbi eget dui a nibh dignissim lacinia a eu turpis. Sed
-        nec massa quam. Praesent congue enim lectus, nec maximus ligula viverra
-        at. Vestibulum sed aliquam ante. Curabitur vel mauris nulla. Cras a
-        ipsum mauris. Maecenas sed aliquam odio. Etiam velit risus, vestibulum
-        in dolor a, iaculis sollicitudin velit. Morbi rhoncus augue ut rutrum
-        euismod. In massa sapien, luctus venenatis urna a, imperdiet pretium
-        mauris. Etiam euismod tellus vel tortor molestie, consectetur.
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "2rem",
-          justifyContent: "center",
-          flexDirection: "row",
-        }}
-      >
-        <IconButton
-          icon={<Facebook />}
-          sx={{ background: "transparent", border: "1px solid #000" }}
-        />
-        <IconButton
-          icon={<Instagram />}
-          sx={{ background: "transparent", border: "1px solid #000" }}
-        />
-        <IconButton
-          icon={<AlphaX />}
-          sx={{ background: "transparent", border: "1px solid #000" }}
-        />
-        <IconButton
-          icon={<Linkedin />}
-          sx={{ background: "transparent", border: "1px solid #000" }}
-        />
-      </Box>
+        Moviehive - Copyright © {moment().format("YYYY")}
+      </Text>
     </Box>
   );
 }
